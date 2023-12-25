@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromecast TV Connection</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .connect-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button class="connect-button" onclick="connectToChromecast()">Connect to Chromecast</button>
+    
+    <script>
+        function connectToChromecast() {
+            // Check if the browser supports the Google Cast API
+            if (chrome.cast && chrome.cast.isAvailable) {
+                const sessionRequest = new chrome.cast.SessionRequest(chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+                const apiConfig = new chrome.cast.ApiConfig(sessionRequest, sessionListener, receiverListener);
+
+                // Initialize the Cast API
+                chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+            } else {
+                console.error('Chromecast API is not available.');
+            }
+        }
+
+        function onInitSuccess() {
+            console.log('Chromecast API initialized successfully.');
+        }
+
+        function onError(error) {
+            console.error('Error during Chromecast API initialization:', error);
+        }
+
+        function sessionListener(session) {
+            console.log('Chromecast session created:', session);
+            // Handle session events and media controls here
+        }
+
+        function receiverListener(availability) {
+            if (availability === chrome.cast.ReceiverAvailability.AVAILABLE) {
+                console.log('Chromecast receiver is available.');
+            } else {
+                console.log('No Chromecast receiver available.');
+            }
+        }
+    </script>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+</body>
+</html>
