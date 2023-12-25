@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Remote Control</title>
+</head>
+<body>
+    <h1>TV Remote Control</h1>
+    
+    <!-- Your TV remote layout with necessary buttons and colors -->
+
+    <script>
+        // You can use JavaScript to handle remote control functionality here
+        // Access localIP from the URL parameters if needed
+        const urlParams = new URLSearchParams(window.location.search);
+        const localIP = urlParams.get('localIP');
+        console.log('Detected Local IP:', localIP);
+    </script>
+</body>
+</html>
